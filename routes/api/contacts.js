@@ -1,22 +1,31 @@
 const express = require("express");
-
 const router = express.Router();
-
 const { contacts: ctrl } = require("../../controllers");
 const { ctrlWrapper } = require("../../helpers");
-const { validation, isValidId } = require("../../middlewares");
+const { authenticate, validation, isValidId } = require("../../middlewares");
 const { schemas } = require("../../models/contact");
 
-router.get("/", ctrlWrapper(ctrl.getAll));
+router.get("/", authenticate, ctrlWrapper(ctrl.getAll));
 
-router.get("/:contactId", isValidId, ctrlWrapper(ctrl.findOneById));
+router.get(
+  "/:contactId",
+  authenticate,
+  isValidId,
+  ctrlWrapper(ctrl.findOneById)
+);
 
-router.post("/", validation(schemas.addContact), ctrlWrapper(ctrl.add));
+router.post(
+  "/",
+  authenticate,
+  validation(schemas.addContact),
+  ctrlWrapper(ctrl.add)
+);
 
-router.delete("/:contactId", isValidId, ctrlWrapper(ctrl.remove));
+router.delete("/:contactId", authenticate, isValidId, ctrlWrapper(ctrl.remove));
 
 router.put(
   "/:contactId",
+  authenticate,
   isValidId,
   validation(schemas.addContact),
   ctrlWrapper(ctrl.findByIdAndUpdate)
@@ -24,6 +33,7 @@ router.put(
 
 router.patch(
   "/:contactId/favorite",
+  authenticate,
   isValidId,
   validation(schemas.updateFavorite),
   ctrlWrapper(ctrl.updateOneField)
