@@ -40,6 +40,7 @@ const userShema = Schema(
     password: { type: String, required: [true, "Password is required"] },
     subscription: { type: String, enum: group, default: "starter" },
     token: { type: String, default: "" },
+    avatarURL: { type: String, required: true },
   },
   { versionKey: false, timestamps: true }
 );

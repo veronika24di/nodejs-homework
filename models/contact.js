@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model, SchemaTypes } = require("mongoose");
 const Joi = require("joi");
 
 const group = ["work", "friend", "family", "other"];
@@ -31,6 +31,7 @@ const contactSchema = Schema(
     phone: { type: String, required: true, uniqu: true },
     group: { type: String, enum: group, required: true },
     favorite: { type: Boolean, default: false },
+    owner: { type: SchemaTypes.ObjectId, ref: "user" },
   },
   { versionKey: false, timestamps: true }
 );
