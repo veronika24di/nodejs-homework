@@ -19,8 +19,9 @@ const authenticate = async (req, res, next) => {
     req.user = user;
     next();
   } catch (error) {
-    if (error.message === "Invalid signature") {
+    if (error.message === "invalid signature") {
       error.status = 401;
+      error.message = "Not authorized";
     }
     next(error);
   }

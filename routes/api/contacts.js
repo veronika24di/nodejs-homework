@@ -14,14 +14,14 @@ router.get(
   ctrlWrapper(ctrl.findOneById)
 );
 
+router.delete("/:contactId", authenticate, isValidId, ctrlWrapper(ctrl.remove));
+
 router.post(
   "/",
   authenticate,
   validation(schemas.addContact),
   ctrlWrapper(ctrl.add)
 );
-
-router.delete("/:contactId", authenticate, isValidId, ctrlWrapper(ctrl.remove));
 
 router.put(
   "/:contactId",

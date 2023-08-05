@@ -8,6 +8,9 @@ const { User } = require("../../models/user");
 const login = async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
+  if (!user.verify) {
+    throw createError(401, "Verification of email did not pass");
+  }
   if (!user) {
     throw createError(401, "Wrong email");
   }
