@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Node</title>
+  </head>
+  <body>
+    <form
+      type="submit"
+      action=""
+      id="add-contact-form"
+      enctype="multipart/form-data"
+    >
+      <div>
+        <label for="">Name</label>
+        <input type="text" name="name" placeholder="name" />
+      </div>
+      <div>
+        <label for="">Email</label>
+        <input type="email" name="email" placeholder="email" />
+      </div>
+      <div>
+        <label for="">Number phone</label>
+        <input type="tel" name="phone" placeholder="phone" />
+      </div>
+      <div>
+        <input type="radio" name="group" value="friend" id="gropeChoice1" />
+        <label for="gropeChoice1">Friend</label>
+        <input type="radio" name="group" value="work" id="gropeChoice2" />
+        <label for="gropeChoice2">Work</label>
+        <input type="radio" name="group" value="family" id="gropeChoice3" />
+        <label for="gropeChoice3">Family</label>
+        <input
+          type="radio"
+          name="group"
+          value="other"
+          id="gropeChoice4"
+          checked
+        />
+        <label for="gropeChoice4">Other</label>
+      </div>
+      <div>
+        <input
+          type="checkbox"
+          name="favorite"
+          aria-checked="false"
+          id="favoriteChoice1"
+        />
+        <label for="favoriteChoice1">Favorite</label>
+      </div>
+      <div>
+        <label for="">Add image</label>
+        <input type="file" name="image" placeholder="image" />
+      </div>
+      <div>
+        <input type="submit" name="submit" />
+      </div>
+    </form>
+
+    <script>
+      const contactAddForm = document.getElementById("add-contact-form");
+      const submitHandler = (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget);
+        formData.append("name", this.elements.name.value);
+        formData.append("email", this.elements.email.value);
+        formData.append("phone", this.elements.phone.value);
+      };
+      contactAddForm.addEventListener("submit", submitHandler);
+    </script>
+  </body>
+</html>
